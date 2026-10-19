@@ -10,7 +10,7 @@ desktop.ini
 output/
 *.html
 !assets/*.html
-content-*.json
+/content-*.json
 
 # Python
 __pycache__/
