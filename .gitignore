@@ -1,0 +1,23 @@
+# OS / 编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# 工作产物：内容 JSON 与输出报告是运行时生成物，不入库
+# （examples/ 下的示例内容除外）
+output/
+*.html
+!assets/*.html
+content-*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 临时文件
+*.tmp
+*.bak
+pgwd_*/
