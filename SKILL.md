@@ -1,6 +1,11 @@
 ---
 name: paogen-wendi
+version: 1.0.0
+display_name: 刨根问底
+display_name_en: Deep-Dive Research
 description: 刨根问底深度研究报告生成器。对任意主题/领域/问题按 11 个深度研究角度（反常识洞察、顶尖精通、未来二十年、千年文明、思维逆向工程、古代智慧、后人类视角、前提拆解、最强反方、失败者研究、极端约束）做深度分析，产出日式极简杂志风排版的美观 HTML 与 PDF 报告（黑白双色调、中国红点缀、宋体下沉首字）。内容要求机制解释、定量证据与边界条件，禁止空泛立场文。凡是用户要求"刨根问底""深挖某主题""多角度深度分析某领域并出报告""研究透某个问题""11个角度分析"之类任务，必须使用本 skill。
+description_zh: 刨根问底深度研究报告生成器。对任意主题/领域/问题按 11 个深度研究角度（反常识洞察、顶尖精通、未来二十年、千年文明、思维逆向工程、古代智慧、后人类视角、前提拆解、最强反方、失败者研究、极端约束）做深度分析，产出日式极简杂志风排版的美观 HTML 与 PDF 报告（黑白双色调、中国红点缀、宋体下沉首字）。内容要求机制解释、定量证据与边界条件，禁止空泛立场文。凡是用户要求"刨根问底""深挖某主题""多角度深度分析某领域并出报告""研究透某个问题""11个角度分析"之类任务，必须使用本 skill。
+description_en: An in-depth research report generator. Analyzes any topic, field, or question through 11 deep-research perspectives (counter-intuitive insights, top-tier mastery, the next twenty years, a thousand-year civilization, reverse engineering of thinking, ancient wisdom, post-human perspective, premise deconstruction, strongest opposition, loser studies, extreme constraints), and produces beautifully typeset HTML and PDF reports in Japanese minimalist magazine style (black-and-white duotone, Chinese red accents, Song-typeface drop caps). Content must include mechanism explanations, quantitative evidence, and boundary conditions; vague position pieces are forbidden. Use this skill whenever the user asks to get to the bottom of a topic, dig deep into a subject, produce a multi-perspective deep-analysis report, thoroughly research a question, or analyze from 11 angles.
 ---
 
 # 刨根问底
@@ -35,7 +40,7 @@ description: 刨根问底深度研究报告生成器。对任意主题/领域/�
 - 文件名：`content-{主题}-{日期}.json`。
 - 全 11 章报告 12000～18000 字，为防单次输出截断，**拆成两个 JSON**：`content-*-a.json`（元信息 + 第 1～6 章）、`content-*-b.json`（第 7～11 章），脚本自动合并。
 - 写作纪律见 angles.md：全角标点、信息密度、编辑式章标题、lead 首句直接进入内容（首字会被做成下沉首字）、判断给适用条件。
-- **写完自查**（对照 angles.md「质量门槛」）：事实层占比≥40%、每章 3～4 个分析点且形成推进链、分析点无连续同种论证方式、无「研究表明」式无出处指代、无「显然/众所周知」。自查不通过就重写，不许带病进入下一步。
+- **写完自查**（对照 angles.md「质量门槛」与「去AI味门槛」）：事实层占比≥40%、每章 3～4 个分析点且形成推进链、分析点无连续同种论证方式、无「研究表明」式无出处指代、无「显然/众所周知」；去AI味硬标准：全文破折号 0、分号≤3、无 50 字以上长句、禁用清单零命中（自查命令见 angles.md）。自查不通过就重写，不许带病进入下一步。
 
 ### 4. 生成 HTML 与 PDF（最短路径，一条命令）
 
@@ -57,7 +62,8 @@ python "<本skill目录>/scripts/build_report.py" \
 2. **纹理与色彩**：网点纹理正常铺满；红色只出现在锚点（章号、首字、规线、标签、编号），无第四种颜色。
 3. **字体加载**：PDF 中宋体/黑体正确渲染（Google Fonts 加载由脚本保证；若离线生成需人工确认回退字体可用）。
 4. **内容质量**：事实层分析点均带具体出处；每章有推进链；综合判断回收了至少五个角度。
-5. **无元描述**：成品中不出现生成过程、提示词、AI 参与的任何痕迹。
+5. **去AI味抽检**：随机抽三章连读。句子是否一句一件事？有没有绕口的翻译腔？有没有连续排比？念出来像人话还是像通稿？不达标回到第 3 步重写对应章节。
+6. **无元描述**：成品中不出现生成过程、提示词、AI 参与的任何痕迹。
 
 发现问题回到对应步骤修正后重新生成，不许带问题交付。
 
